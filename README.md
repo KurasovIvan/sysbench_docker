@@ -1,2 +1,2 @@
 # sysbench_docker
-Run Sysbench performance MySQL test on Docker
+Run Sysbench-tpcc performance test for MySQL on Docker
