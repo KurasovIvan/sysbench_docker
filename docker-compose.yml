@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+    gun:
+        build:
+            context: ./docker/gun
+            dockerfile: Dockerfile
+        networks:
+            - sysbench
+        depends_on:
+            - db
+        container_name: sb-gun
+    db:
+        image: mysql:8.0
+        restart: always
+        volumes:
+            - ./tmp/db:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: sbt
+            MYSQL_USER: sb
+            MYSQL_PASSWORD: sbpass
+        ports:
+            - 8101:3306
+        networks:
+            - sysbench
+        container_name: sb-db
+networks:
+    sysbench:
+        driver: bridge
